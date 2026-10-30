@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Jumia Careers | Apply with confidence</title>
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter (clean, modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+            color: #1f2937;
+            line-height: 1.5;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .careers-container {
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1rem 0.5rem;
+        }
+
+        /* header / brand */
+        .brand-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .jumia-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .jumia-logo i {
+            font-size: 2rem;
+            color: #f68b1e; /* Jumia orange */
+        }
+
+        .jumia-logo span {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0b2545;
+        }
+
+        .jumia-logo span .light {
+            font-weight: 400;
+            color: #4b5563;
+        }
+
+        .carrier-badge {
+            background-color: #eef2ff;
+            color: #1e40af;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+            border: 1px solid #c7d2fe;
+            margin-left: auto;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0b2545;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .subhead {
+            font-size: 1.1rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .subhead i {
+            color: #f68b1e;
+        }
+
+        /* main grid: jobs + form card */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        /* job list */
+        .jobs-section {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.5rem 1.25rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.03);
+            border: 1px solid #edf2f7;
+            transition: all 0.2s;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #0b2545;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.9rem;
+        }
+
+        .section-title i {
+            color: #f68b1e;
+            font-size: 1.3rem;
+        }
+
+        .job-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .job-card {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: #fafcff;
+            border: 1px solid #e9eef3;
+            border-radius: 18px;
+            padding: 1.1rem 1.25rem;
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+
+        .job-card:hover {
+            border-color: #f68b1e;
+            background: #fffaf5;
+            box-shadow: 0 4px 12px rgba(246, 139, 30, 0.08);
+        }
+
+        .job-card.selected {
+            border-color: #f68b1e;
+            background: #fff4ea;
+            box-shadow: 0 4px 14px rgba(246, 139, 30, 0.15);
+        }
+
+        .job-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 2 1 220px;
+        }
+
+        .job-icon {
+            background: #ffffff;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            color: #f68b1e;
+            font-size: 1.4rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .job-details h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0b2545;
+            margin-bottom: 0.25rem;
+        }
+
+        .job-details .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .job-details .meta i {
+            margin-right: 0.3rem;
+            color: #9ca3af;
+            font-size: 0.8rem;
+        }
+
+        .fee-badge {
+            background: #0b2545;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.45rem 1rem;
+            border-radius: 40px;
+            white-space: nowrap;
+        }
+
+        .fee-badge i {
+            margin-right: 0.3rem;
+            font-size: 0.8rem;
+        }
+
+        /* payment & application card */
+        .apply-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.75rem 1.5rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04), 0 4px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            height: fit-content;
+            position: sticky;
+            top: 1rem;
+        }
+
+        .apply-card .section-title {
+            margin-top: 0;
+        }
+
+        .selected-job-summary {
+            background: #f9fafc;
+            border-radius: 18px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.75rem;
+            border-left: 5px solid #f68b1e;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .selected-job-summary .label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .selected-job-summary .job-name {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #0b2545;
+        }
+
+        .selected-job-summary .job-fee {
+            background: #0b2545;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group label i {
+            color: #f68b1e;
+            margin-right: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: 0.15s;
+            background: #ffffff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #f68b1e;
+            box-shadow: 0 0 0 3px rgba(246, 139, 30, 0.15);
+        }
+
+        .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 0.75rem;
+            margin: 1rem 0 1.25rem;
+        }
+
+        .payment-option {
+            flex: 1;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4b5563;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #ffffff;
+        }
+
+        .payment-option i {
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+
+        .payment-option.active {
+            border-color: #f68b1e;
+            background: #fff7f0;
+            color: #b45309;
+            font-weight: 600;
+        }
+
+        .payment-option.active i {
+            color: #f68b1e;
+        }
+
+        .btn-pay-apply {
+            width: 100%;
+            background: #f68b1e;
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 1rem;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: 0.15s;
+            margin-top: 0.5rem;
+            box-shadow: 0 8px 18px rgba(246, 139, 30, 0.25);
+            letter-spacing: 0.2px;
+        }
+
+        .btn-pay-apply i {
+            font-size: 1.2rem;
+        }
+
+        .btn-pay-apply:hover {
+            background: #e07a0e;
+            box-shadow: 0 8px 22px rgba(246, 139, 30, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-pay-apply:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 12px rgba(246, 139, 30, 0.3);
+        }
+
+        .btn-pay-apply:disabled {
+            background: #cbd5e1;
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+            color: #64748b;
+        }
+
+        .secure-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .secure-note i {
+            color: #10b981;
+        }
+
+        /* toast messages */
+        .toast-message {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) scale(0.95);
+            background: #0b2545;
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            z-index: 9999;
+            max-width: 90vw;
+            text-align: center;
+            border-left: 5px solid #f68b1e;
+        }
+
+        .toast-message.show {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* responsiveness */
+        @media (min-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.8rem;
+            }
+
+            body {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1.2fr 0.9fr;
+                gap: 2.5rem;
+            }
+
+            h1 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .job-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.9rem;
+            }
+
+            .fee-badge {
+                align-self: flex-start;
+            }
+
+            .job-info {
+                width: 100%;
+            }
+
+            .apply-card {
+                padding: 1.25rem;
+            }
+
+            .selected-job-summary {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* utility */
+        .text-orange {
+            color: #f68b1e;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="careers-container">
+        <!-- Brand header -->
+        <div class="brand-bar">
+            <div class="jumia-logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Jumia<span class="light"> Careers</span></span>
+            </div>
+            <div class="carrier-badge">
+                <i class="fas fa-briefcase" style="margin-right: 6px;"></i>Carrier Program
+            </div>
+        </div>
+
+        <h1>Apply for a carrier job</h1>
+        <div class="subhead">
+            <i class="fas fa-check-circle"></i> Verified positions &nbsp;|&nbsp;
+            <i class="fas fa-lock"></i> One-time application fee
+        </div>
+
+        <!-- Main grid -->
+        <div class="dashboard-grid">
+            <!-- LEFT: job openings -->
+            <div class="jobs-section">
+                <div class="section-title">
+                    <i class="fas fa-layer-group"></i> Open positions
+                </div>
+                <div class="job-list" id="jobList">
+                    <!-- Job 1 -->
+                    <div class="job-card selected" data-job="Logistics Coordinator" data-fee="1500" data-id="1">
+                        <div class="job-info">
+                            <div class="job-icon"><i class="fas fa-truck"></i></div>
+                            <div class="job-details">
+                                <h3>Logistics Coordinator</h3>
+                                <div class="meta">
+                                    <span><i class="fas fa-map-pin"></i> Lagos, NG</span>
+                                    <span><i class="fas fa-clock"></i> Full-time</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fee-badge"><i class="fas fa-tag"></i> ₦1,500 fee</div>
+                    </div>
+                    <!-- Job 2 -->
+                    <div class="job-card" data-job="Warehouse Supervisor" data-fee="2000" data-id="2">
+                        <div class="job-info">
+                            <div class="job-icon"><i class="fas fa-warehouse"></i></div>
+                            <div class="job-details">
+                                <h3>Warehouse Supervisor</h3>
+                                <div class="meta">
+                                    <span><i class="fas fa-map-pin"></i> Abuja, NG</span>
+                                    <span><i class="fas fa-clock"></i> Full-time</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fee-badge"><i class="fas fa-tag"></i> ₦2,000 fee</div>
+                    </div>
+                    <!-- Job 3 -->
+                    <div class="job-card" data-job="Customer Care Agent" data-fee="1200" data-id="3">
+                        <div class="job-info">
+                            <div class="job-icon"><i class="fas fa-headset"></i></div>
+                            <div class="job-details">
+                                <h3>Customer Care Agent</h3>
+                                <div class="meta">
+                                    <span><i class="fas fa-map-pin"></i> Remote</span>
+                                    <span><i class="fas fa-clock"></i> Part-time</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fee-badge"><i class="fas fa-tag"></i> ₦1,200 fee</div>
+                    </div>
+                    <!-- Job 4 -->
+                    <div class="job-card" data-job="Delivery Rider" data-fee="1000" data-id="4">
+                        <div class="job-info">
+                            <div class="job-icon"><i class="fas fa-motorcycle"></i></div>
+                            <div class="job-details">
+                                <h3>Delivery Rider</h3>
+                                <div class="meta">
+                                    <span><i class="fas fa-map-pin"></i> Port Harcourt</span>
+                                    <span><i class="fas fa-clock"></i> Contract</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fee-badge"><i class="fas fa-tag"></i> ₦1,000 fee</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: payment + application form -->
+            <div class="apply-card">
+                <div class="section-title">
+                    <i class="fas fa-credit-card"></i> Secure application
+                </div>
+
+                <!-- selected job summary -->
+                <div class="selected-job-summary" id="selectedJobSummary">
+                    <div>
+                        <div class="label">Selected role</div>
+                        <div class="job-name" id="selectedJobName">Logistics Coordinator</div>
+                    </div>
+                    <div class="job-fee" id="selectedJobFee">₦1,500</div>
+                </div>
+
+                <!-- form -->
+                <form id="applicationForm" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="fullName"><i class="fas fa-user"></i> Full name</label>
+                        <input type="text" id="fullName" class="form-control" placeholder="e.g. Adebayo Johnson" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email address</label>
+                        <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> Phone number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="+234 801 234 5678" required>
+                    </div>
+
+                    <!-- payment method (UI only, simulated) -->
+                    <label style="font-size: 0.9rem; font-weight: 600; color: #374151; margin-bottom: 0.4rem; display: block;">
+                        <i class="fas fa-wallet text-orange"></i> Payment method
+                    </label>
+                    <div class="payment-methods">
+                        <div class="payment-option active" data-method="card">
+                            <i class="fas fa-credit-card"></i> Card
+                        </div>
+                        <div class="payment-option" data-method="transfer">
+                            <i class="fas fa-university"></i> Transfer
+                        </div>
+                        <div class="payment-option" data-method="ussd">
+                            <i class="fas fa-mobile-alt"></i> USSD
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-pay-apply" id="payApplyBtn">
+                        <i class="fas fa-lock"></i> Pay & apply now
+                    </button>
+
+                    <div class="secure-note">
+                        <i class="fas fa-shield-alt"></i> 100% secure payment • application fee is non-refundable
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- toast container -->
+    <div id="toast" class="toast-message"></div>
+
+    <script>
+        (function() {
+            // DOM elements
+            const jobCards = document.querySelectorAll('.job-card');
+            const selectedJobName = document.getElementById('selectedJobName');
+            const selectedJobFee = document.getElementById('selectedJobFee');
+            const payBtn = document.getElementById('payApplyBtn');
+            const applicationForm = document.getElementById('applicationForm');
+            const toastEl = document.getElementById('toast');
+            const fullNameInput = document.getElementById('fullName');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const paymentOptions = document.querySelectorAll('.payment-option');
+
+            // state
+            let selectedJob = {
+                title: 'Logistics Coordinator',
+                fee: 1500,
+                id: 1
+            };
+            let selectedPaymentMethod = 'card';
+            let toastTimeout = null;
+
+            // Initialize: ensure first job selected and summary reflects
+            function setSelectedJob(card) {
+                // remove selected class from all
+                jobCards.forEach(c => c.classList.remove('selected'));
+                // add to clicked
+                card.classList.add('selected');
+
+                const title = card.getAttribute('data-job');
+                const fee = parseInt(card.getAttribute('data-fee'), 10);
+                const id = card.getAttribute('data-id');
+
+                selectedJob = { title, fee, id };
+
+                // update summary
+                selectedJobName.textContent = title;
+                selectedJobFee.textContent = `₦${fee.toLocaleString()}`;
+            }
+
+            // Event listeners for job cards
+            jobCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // if clicking on badge or info still triggers, fine.
+                    setSelectedJob(card);
+                });
+            });
+
+            // Payment method UI toggle
+            paymentOptions.forEach(opt => {
+                opt.addEventListener('click', () => {
+                    paymentOptions.forEach(o => o.classList.remove('active'));
+                    opt.classList.add('active');
+                    selectedPaymentMethod = opt.getAttribute('data-method');
+                });
+            });
+
+            // Show toast message
+            function showToast(message, isError = false) {
+                if (toastTimeout) clearTimeout(toastTimeout);
+                toastEl.textContent = message;
+                toastEl.style.borderLeftColor = isError ? '#ef4444' : '#f68b1e';
+                toastEl.classList.add('show');
+
+                toastTimeout = setTimeout(() => {
+                    toastEl.classList.remove('show');
+                }, 3500);
+            }
+
+            // Validation
+            function validateForm() {
+                const name = fullNameInput.value.trim();
+                const email = emailInput.value.trim();
+                const phone = phoneInput.value.trim();
+
+                if (!name) {
+                    showToast('Please enter your full name.', true);
+                    fullNameInput.focus();
+                    return false;
+                }
+                if (name.length < 2) {
+                    showToast('Full name is too short.', true);
+                    fullNameInput.focus();
+                    return false;
+                }
+
+                // simple email check
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email || !emailRegex.test(email)) {
+                    showToast('Enter a valid email address.', true);
+                    emailInput.focus();
+                    return false;
+                }
+
+                // phone: at least 7 digits (simple)
+                const phoneDigits = phone.replace(/[\s+()-]/g, '');
+                if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+                    showToast('Please enter a valid phone number (7-15 digits).', true);
+                    phoneInput.focus();
+                    return false;
+                }
+
+                return true;
+            }
+
+            // reset button state (not necessary but good)
+            function setButtonLoading(isLoading) {
+                if (isLoading) {
+                    payBtn.disabled = true;
+                    payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing payment...';
+                } else {
+                    payBtn.disabled = false;
+                    payBtn.innerHTML = '<i class="fas fa-lock"></i> Pay & apply now';
+                }
+            }
+
+            // Handle form submit (payment simulation)
+            applicationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // validate fields
+                if (!validateForm()) return;
+
+                // simulate payment (no real charge)
+                setButtonLoading(true);
+
+                // disable job card and payment changes? For better UX, but we just let it be.
+                // Simulate a network request
+                setTimeout(() => {
+                    // Build success message with job title and fee
+                    const feeFormatted = selectedJob.fee.toLocaleString();
+                    const methodLabel = selectedPaymentMethod === 'card' ? 'card' :
+                                        selectedPaymentMethod === 'transfer' ? 'bank transfer' : 'USSD';
+
+                    showToast(`✅ Payment of ₦${feeFormatted} via ${methodLabel} successful! Your application for "${selectedJob.title}" has been submitted.`, false);
+
+                    // reset button
+                    setButtonLoading(false);
+
+                    // (optional) reset form? keep for demo, but we might clear
+                    // fullNameInput.value = '';
+                    // emailInput.value = '';
+                    // phoneInput.value = '';
+                    // but we leave it for demo friendly.
+
+                }, 1800);
+            });
+
+            // initial selected summary (first job card already selected in HTML)
+            // but ensure selectedJob is set from the selected card (if any)
+            const firstSelected = document.querySelector('.job-card.selected');
+            if (firstSelected) {
+                const title = firstSelected.getAttribute('data-job');
+                const fee = parseInt(firstSelected.getAttribute('data-fee'), 10);
+                selectedJob = { title, fee, id: firstSelected.getAttribute('data-id') };
+                selectedJobName.textContent = title;
+                selectedJobFee.textContent = `₦${fee.toLocaleString()}`;
+            } else {
+                // fallback: select first
+                if (jobCards.length) setSelectedJob(jobCards[0]);
+            }
+
+            // prefill example for demo? not necessary but nice.
+            // we can leave empty for user to fill.
+
+            // little UX: click on toast can't block
+            toastEl.addEventListener('click', () => {
+                toastEl.classList.remove('show');
+            });
+        })();
+    </script>
+</body>
+</html>
